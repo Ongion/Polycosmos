@@ -41,6 +41,7 @@ last_room_completed=0
 --- variables for deathlink checks
 
 is_greece_death = false
+should_send_deathlink = true
 
 --variable for avoid racing problems
 
@@ -309,7 +310,9 @@ function PolycosmosEvents.KillPlayer( message )
         CurrentRun.Hero.Health = 0
         CheckLastStand(CurrentRun.Hero, { })
     else
+        should_send_deathlink = false
         KillHero(CurrentRun.Hero, { }, { })
+        should_send_deathlink = true
     end
 end
 
@@ -327,7 +330,9 @@ end
 
 
 ModUtil.Path.Wrap("HandleDeath", function( baseFunc, currentRun, killer, killingUnitWeapon )
-	PolycosmosEvents.SendDeathlink()
+    if should_send_deathlink then
+	    PolycosmosEvents.SendDeathlink()
+    end
 	return baseFunc(currentRun, killer, killingUnitWeapon)
 end)
 
