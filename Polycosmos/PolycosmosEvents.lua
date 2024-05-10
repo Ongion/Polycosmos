@@ -41,7 +41,7 @@ last_room_completed=0
 --- variables for deathlink checks
 
 is_greece_death = false
-is_deathlink_caused_of_death = false
+is_deathlink_cause_of_death = false
 
 --variable for avoid racing problems
 
