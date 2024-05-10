@@ -41,6 +41,7 @@ last_room_completed=0
 --- variables for deathlink checks
 
 is_greece_death = false
+is_deathlink_cause_of_death = false
 
 --variable for avoid racing problems
 
@@ -309,7 +310,9 @@ function PolycosmosEvents.KillPlayer( message )
         CurrentRun.Hero.Health = 0
         CheckLastStand(CurrentRun.Hero, { })
     else
+        is_deathlink_cause_of_death = true
         KillHero(CurrentRun.Hero, { }, { })
+        is_deathlink_cause_of_death = false
     end
 end
 
@@ -320,7 +323,7 @@ StyxScribe.AddHook( PolycosmosEvents.KillPlayer, styx_scribe_recieve_prefix.."De
 function PolycosmosEvents.SendDeathlink()
     if (is_greece_death == true) then
         is_greece_death = false
-    else
+    elseif (is_deathlink_cause_of_death == false) then
         StyxScribe.Send(styx_scribe_send_prefix.."Zag died")
     end
 end
