@@ -323,7 +323,7 @@ StyxScribe.AddHook( PolycosmosEvents.KillPlayer, styx_scribe_recieve_prefix.."De
 function PolycosmosEvents.SendDeathlink()
     if (is_greece_death == true) then
         is_greece_death = false
-    else if (is_deathlink_cause_of_death == false)
+    elseif (is_deathlink_cause_of_death == false) then
         StyxScribe.Send(styx_scribe_send_prefix.."Zag died")
     end
 end
